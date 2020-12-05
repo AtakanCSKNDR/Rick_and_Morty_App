@@ -1,7 +1,7 @@
 <template>
-  <div class="Episodes">
+  <div class="Characters" style="background:#24282f; height:100%">
     <v-container fluid>
-      <v-card class="mx-auto" max-width="344">
+      <v-card class="mx-auto" color="#385F73" dark>
         <v-row justify="space-around">
           <v-avatar size="200" style="margin-top:15px">
             <img :src="data.image" alt="John" />
@@ -22,8 +22,7 @@
             <v-card-text>
               <p>Gender : {{ data.gender }}</p>
               <p>Origin : {{ data.origin.name }}</p>
-              <p>Status : {{ data.status }}</p>
-              <p>Species : {{ data.species }}</p>
+              <p>{{ data.status }} - {{ data.species }}</p>
             </v-card-text>
           </v-card-subtitle>
         </v-row>
@@ -34,26 +33,25 @@
             </p>
           </v-card-text>
         </v-row>
-        <v-card class="character-card">
-          <v-list two-line>
-            <v-list-item-group>
-              <v-list-item
-                v-for="(item, i) in data.episode"
-                :key="i"
-                @click="goEpisode(item)"
-              >
-                <v-list-item-icon style="margin-bottom:0px">
-                  <v-avatar color="indigo" size="36">
-                    <span class="white--text headline">{{ i + 1 }}</span>
-                  </v-avatar>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>Bölüm - {{ i + 1 }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-card>
+
+        <v-list style="background:#385F73; max-height: 300px; overflow: auto;">
+          <v-list-item-group>
+            <v-list-item
+              v-for="(item, i) in data.episode"
+              :key="i"
+              @click="goEpisode(item)"
+            >
+              <v-list-item-icon style="margin-bottom:0px">
+                <v-avatar color="#24282f" size="25">
+                  <span>{{ i + 1 }}</span>
+                </v-avatar>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Bölüm - {{ i + 1 }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
       </v-card>
     </v-container>
   </div>
@@ -84,6 +82,9 @@ export default {
     },
   },
   created() {
+    if (!this.characterDetail) {
+      this.$router.push("/");
+    }
     this.getItems();
   },
 };

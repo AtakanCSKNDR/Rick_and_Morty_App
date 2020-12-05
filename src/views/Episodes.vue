@@ -1,7 +1,7 @@
 <template>
   <div class="Episodes" style="background:#24282f; height:100%">
     <v-container fluid>
-      <v-card class="mx-auto wrapper-card">
+      <v-card class="mx-auto wrapper-card" color="#385F73" dark>
         <v-card-text>
           <div>{{ data.episode }}</div>
           <p class="display-3 text--primary text-wrapper">
@@ -14,26 +14,24 @@
           </p>
         </v-card-text>
 
-        <v-card class="character-card" >
-          <v-list>
-            <v-list-item-group>
-              <v-list-item
-                v-for="(item, i) in data.characters"
-                :key="i"
-                @click="goCharacter(item)"
-              >
-                <v-list-item-icon style="margin-bottom:0px">
-                  <v-avatar color="indigo" size="36">
-                    <span class="white--text headline">{{ i + 1 }}</span>
-                  </v-avatar>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>Character - {{ i + 1 }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-card>
+        <v-list style="background:#385F73; max-height: 300px;overflow: auto;">
+          <v-list-item-group>
+            <v-list-item
+              v-for="(item, i) in data.characters"
+              :key="i"
+              @click="goCharacter(item)"
+            >
+              <v-list-item-icon style="margin-bottom:0px">
+                <v-avatar color="#24282f" size="25">
+                  <span class="white--text">{{ i + 1 }}</span>
+                </v-avatar>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Character - {{ i + 1 }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
       </v-card>
     </v-container>
   </div>
@@ -41,7 +39,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "Episodes",
   props: ["episodeDetail"],
@@ -64,11 +61,13 @@ export default {
     },
   },
   created() {
+    if (!this.episodeDetail) {
+      this.$router.push("/")
+    }
     this.getItems();
   },
 };
 </script>
-
 <style lang="scss" scoped>
 .character-card {
   max-height: 250px;

@@ -7,15 +7,16 @@
       style="width:100%"
     >
       <v-card-text>
-        <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
-          <v-icon size="24px">
-            {{ icon }}
+        <v-btn
+          v-for="(icon, index) in icons"
+          :key="index"
+          class="mx-4 white--text"
+          icon
+        >
+          <v-icon size="24px" @click="goWebsite(icon.url)">
+            {{ icon.icon }}
           </v-icon>
         </v-btn>
-      </v-card-text>
-
-      <v-card-text class="white--text pt-0">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
       </v-card-text>
 
       <v-divider></v-divider>
@@ -30,7 +31,19 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      icons: [
+        { icon: "mdi-twitter", url: "http://www.twitter.com" },
+        { icon: "mdi-linkedin", url: "https://www.linkedin.com/in/atakan-coskundere-287b06178/" },
+        { icon: "mdi-instagram", url: "http://www.instagram.com" },
+        { icon: "mdi-github", url: "https://github.com/AtakanCSKNDR" },
+      ],
+    };
+  },
+  methods: {
+    goWebsite(row) {
+      window.open(row, "_blank");
+    },
   },
 };
 </script>
