@@ -43,8 +43,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
@@ -71,9 +69,9 @@ export default {
       this.getItems();
     },
     getItems() {
-      axios.get(`${this.currentPage}`).then((response) => {
-        this.info = response.data.info;
-        this.data = response.data.results;
+      this.$store.dispatch("getEpisodes", this.currentPage).then(() => {
+        this.data = this.$store.getters.getData;
+        this.info = this.$store.getters.getInfo;
       });
     },
   },

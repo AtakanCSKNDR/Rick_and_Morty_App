@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "Episodes",
   props: ["episodeDetail"],
@@ -49,8 +48,8 @@ export default {
   },
   methods: {
     getItems() {
-      axios.get(`${this.episodeDetail}`).then((response) => {
-        this.data = response.data;
+        this.$store.dispatch("getEpisodeDetail", this.episodeDetail).then(() => {
+        this.data = this.$store.getters.getData;
       });
     },
     goCharacter(row) {
